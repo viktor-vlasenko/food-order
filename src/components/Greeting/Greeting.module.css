@@ -1,0 +1,8 @@
+.greeting{
+  width:70%;
+  padding: 0.5rem 1rem;
+  margin: 8rem auto 2rem;
+  color: white;
+  background-color: rgb(92, 92, 92);
+  text-align:center;
+}
