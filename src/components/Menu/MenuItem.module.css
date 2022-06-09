@@ -1,0 +1,43 @@
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+}
+
+.item-details {
+  width: 75%;
+}
+
+.name{
+  margin: 5px 0px 3px;
+}
+
+.description {
+  margin: 0px;
+  font-style: italic;
+}
+
+.price {
+  margin: 1px 0px;
+  font-size: large;
+  font-weight: bold;
+  color: chocolate;
+}
+
+.item-order {
+  width: 20%;
+}
+
+.item-order label {
+  font-weight: bold;
+  width: 50%;
+}
+
+.item-order input {
+  width: 40%;
+}
+
+.item-order Button {
+  width: 70%;
+}

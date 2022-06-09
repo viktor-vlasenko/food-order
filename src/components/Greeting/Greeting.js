@@ -12,7 +12,7 @@ const Greeting = () => {
       </p>
       <p>
 
-        All our meals are cruelty-free, cooked with only plant-based ingridients.
+        All our meals are cruelty-free, cooked only using plant-based ingridients.
       </p>
     </Card>
   );
