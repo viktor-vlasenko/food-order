@@ -1,0 +1,55 @@
+.backdrop {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.cart {
+  position: fixed;
+  left: 10%;
+  top: 30%;
+  width: 80%;
+  z-index: 10;
+  overflow: hidden;
+}
+
+h3 {
+  margin: 3rem;
+}
+
+.item {
+  margin: 0.2rem 1rem 0;
+  border-bottom: 1px solid grey;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 1rem;
+  font-size: large;
+  font-weight: bold;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 1rem 1rem 0;
+}
+
+.actions Button {
+  width:6rem;
+  height: 2rem;
+  margin-left: 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.close{
+  background-color: white;
+  color: green;
+}
+
+

@@ -1,5 +1,6 @@
 .greeting{
   width:70%;
+  max-width: 900px;
   padding: 0.5rem 1rem;
   margin: 8rem auto 2rem;
   color: white;

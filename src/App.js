@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import Header from "./components/Header/Header";
 import Menu from "./components/Menu/Menu";
 import Greeting from "./components/Greeting/Greeting";
+import Cart from "./components/Cart/Cart";
+import CartContext from "./store/cart-context";
 
 const MENU = [
   {
@@ -27,12 +29,15 @@ const MENU = [
 ];
 
 function App() {
+  const ctx = useContext(CartContext);
+
   return (
-    <div>
+    <React.Fragment>
+      {ctx.isOpen && <Cart />}
       <Header />
       <Greeting />
       <Menu menu={MENU} />
-    </div>
+    </React.Fragment>
   );
 }
 
