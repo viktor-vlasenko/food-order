@@ -52,3 +52,10 @@ h3 {
   background-color: white;
   color: green;
 }
+
+@media (min-width: 768px) {
+  .cart {
+    left: calc(50% - 20rem);
+    width: 40rem;
+  }
+}
