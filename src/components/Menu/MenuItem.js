@@ -31,7 +31,7 @@ const MenuItem = (props) => {
       </div>
       <form onSubmit={submitHandler} className={classes["item-order"]}>
         <label>Amount</label>
-        <input type="number" value={amount} onChange={amountChangeHandler} />
+        <input type="number" min='1' value={amount} onChange={amountChangeHandler} />
         <Button type="submit" text="+ Add" />
       </form>
     </div>

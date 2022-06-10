@@ -19,6 +19,7 @@ const Cart = () => {
             <CartItem
               className={classes.item}
               key={element.id}
+              id={element.id}
               name={element.name}
               price={element.price}
               amount={element.amount}

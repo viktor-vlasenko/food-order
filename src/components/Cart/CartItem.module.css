@@ -1,0 +1,55 @@
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.2rem 1rem 0;
+  border-bottom: 1px solid grey;
+}
+
+.details {
+  width: 40%;
+}
+
+.details h4 {
+  margin: 1rem 0 0;
+}
+
+.price-amount {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.price {
+  color: darkolivegreen;
+  font-weight: bold;
+}
+
+.amount {
+  border: 1px solid grey;
+  border-radius: 3px;
+  padding: 0.2rem 0.7rem;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.controls {
+  display: flex;
+}
+
+.controls Button {
+  height: 1.5rem;
+  width: 3rem;
+  margin-left: 0.5rem;
+  margin-right: 0;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: white;
+  color: darkgreen;
+}
+
+.controls Button:hover {
+  background-color: darkgreen;
+  color: white;
+  box-shadow: 0 0 0 0;
+}

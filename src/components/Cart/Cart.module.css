@@ -20,11 +20,6 @@ h3 {
   margin: 3rem;
 }
 
-.item {
-  margin: 0.2rem 1rem 0;
-  border-bottom: 1px solid grey;
-}
-
 .total {
   display: flex;
   justify-content: space-between;
@@ -40,16 +35,20 @@ h3 {
 }
 
 .actions Button {
-  width:6rem;
+  width: 6rem;
   height: 2rem;
   margin-left: 1rem;
   font-size: 1rem;
   font-weight: bold;
 }
 
-.close{
+.actions Button:hover {
+  background-color: darkgreen;
+  color: white;
+  box-shadow: 0 0 0 0;
+}
+
+.close {
   background-color: white;
   color: green;
 }
-
-

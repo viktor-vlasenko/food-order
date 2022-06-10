@@ -23,13 +23,19 @@ const cartReducer = (state, action) => {
     return {
       isOpen: state.isOpen,
       items: [...state.items, action.val],
-      totalAmount: state.totalAmount + action.val.price * action.val.amount,
+      totalAmount: state.totalAmount,
     };
   } else if (action.type === "CHANGE") {
     return {
       isOpen: state.isOpen,
-      items: action.val.cartItems,
-      totalAmount: action.val.newTotalAmount,
+      items: action.val,
+      totalAmount: state.totalAmount,
+    };
+  } else if (action.type === "ORDER") {
+    return {
+      isOpen: false,
+      items: [],
+      totalAmount: 0,
     };
   }
 };
@@ -40,6 +46,17 @@ export const CartContextProvider = (props) => {
     items: [],
     totalAmount: 0,
   });
+
+  const { items: cartItems } = cart;
+
+  useEffect(() => {
+    const storedCart = JSON.parse(localStorage.getItem("cart"));
+    cartsDispatch({ type: "CHANGE", val: storedCart });
+  }, []);
+
+  useEffect(() => {
+    updateStorage();
+  }, [cartItems]);
 
   const openHandler = () => {
     cartsDispatch({ type: "TOGGLE", val: true });
@@ -59,7 +76,6 @@ export const CartContextProvider = (props) => {
   const addItemHandler = (addedItem) => {
     let inCart = itemInCart(addedItem.id);
     if (inCart !== false) {
-      console.log("plussss");
       let newCartItems = changeAmount(addedItem.id, addedItem.amount);
       cartsDispatch({ type: "CHANGE", val: newCartItems });
     } else {
@@ -67,30 +83,44 @@ export const CartContextProvider = (props) => {
     }
   };
 
+  const updateStorage = async () => {
+    localStorage.setItem("cart", JSON.stringify(cart.items));
+  };
+
   const changeAmount = (id, amount) => {
     let cartItems = [...cart.items];
     let idx = itemInCart(id);
     cartItems[idx].amount = Number(cartItems[idx].amount) + Number(amount);
-    let newTotalAmount = 0;
     if (cartItems[idx].amount <= 0) {
       cartItems.splice(idx, 1);
     }
-    for (let item of cartItems) {
-      newTotalAmount += item.amount * item.price;
+    return cartItems;
+  };
+
+  const calculateTotalAmount = (items) => {
+    let newTotal = 0;
+    for (let item of items) {
+      newTotal += item.amount * item.price;
     }
-    return { cartItems: cartItems, newTotalAmount: newTotalAmount };
+    return newTotal;
   };
 
   const minusClickHandler = (id) => {
-    changeAmount(id, -1);
+    cartsDispatch({ type: "CHANGE", val: changeAmount(id, -1) });
   };
 
   const plusClickHandler = (id) => {
-    changeAmount(id, 1);
+    cartsDispatch({ type: "CHANGE", val: changeAmount(id, 1) });
   };
 
   const orderHandler = () => {
-    console.log("Ordering...");
+    if (cart.items.length === 0) {
+      cartsDispatch({ type: "TOGGLE", val: false });
+    } else {
+      console.log("Ordering...");
+      cartsDispatch({ type: "ORDER" });
+      localStorage.clear();
+    }
   };
 
   return (
@@ -98,7 +128,7 @@ export const CartContextProvider = (props) => {
       value={{
         isOpen: cart.isOpen,
         items: cart.items,
-        totalAmount: cart.totalAmount,
+        totalAmount: calculateTotalAmount(cart.items),
         onAddItem: addItemHandler,
         onMinusClick: minusClickHandler,
         onPlusClick: plusClickHandler,
