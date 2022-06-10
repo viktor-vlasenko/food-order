@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
-import Card from "../UI/Card/Card";
-import Button from "../UI/Button/Button";
-import CartItem from "./CartItem";
 import CartContext from "../../store/cart-context";
+import Button from "../UI/Button/Button";
+import Card from "../UI/Card/Card";
 import classes from "./Cart.module.css";
+import CartItem from "./CartItem";
 
 const Cart = () => {
   const ctx = useContext(CartContext);

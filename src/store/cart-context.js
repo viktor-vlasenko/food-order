@@ -25,6 +25,12 @@ const cartReducer = (state, action) => {
       items: [...state.items, action.val],
       totalAmount: state.totalAmount + action.val.price * action.val.amount,
     };
+  } else if (action.type === "CHANGE") {
+    return {
+      isOpen: state.isOpen,
+      items: action.val.cartItems,
+      totalAmount: action.val.newTotalAmount,
+    };
   }
 };
 
@@ -43,13 +49,45 @@ export const CartContextProvider = (props) => {
     cartsDispatch({ type: "TOGGLE", val: false });
   };
 
-  const addItemHandler = (addedItem) => {
-    cartsDispatch({ type: "ADD", val: addedItem });
+  const itemInCart = (id) => {
+    for (let i = 0; i < cart.items.length; i++) {
+      if (cart.items[i].id === id) return i;
+    }
+    return false;
   };
 
-  const minusClickHandler = () => {};
+  const addItemHandler = (addedItem) => {
+    let inCart = itemInCart(addedItem.id);
+    if (inCart !== false) {
+      console.log("plussss");
+      let newCartItems = changeAmount(addedItem.id, addedItem.amount);
+      cartsDispatch({ type: "CHANGE", val: newCartItems });
+    } else {
+      cartsDispatch({ type: "ADD", val: addedItem });
+    }
+  };
 
-  const plusClickHandler = () => {};
+  const changeAmount = (id, amount) => {
+    let cartItems = [...cart.items];
+    let idx = itemInCart(id);
+    cartItems[idx].amount = Number(cartItems[idx].amount) + Number(amount);
+    let newTotalAmount = 0;
+    if (cartItems[idx].amount <= 0) {
+      cartItems.splice(idx, 1);
+    }
+    for (let item of cartItems) {
+      newTotalAmount += item.amount * item.price;
+    }
+    return { cartItems: cartItems, newTotalAmount: newTotalAmount };
+  };
+
+  const minusClickHandler = (id) => {
+    changeAmount(id, -1);
+  };
+
+  const plusClickHandler = (id) => {
+    changeAmount(id, 1);
+  };
 
   const orderHandler = () => {
     console.log("Ordering...");

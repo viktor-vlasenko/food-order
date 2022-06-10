@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
+import Cart from "./components/Cart/Cart";
+import Greeting from "./components/Greeting/Greeting";
 import Header from "./components/Header/Header";
 import Menu from "./components/Menu/Menu";
-import Greeting from "./components/Greeting/Greeting";
-import Cart from "./components/Cart/Cart";
 import CartContext from "./store/cart-context";
 
 const MENU = [
