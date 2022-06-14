@@ -1,14 +1,19 @@
-import React, { useContext } from "react";
+import React from "react";
 import CartMinimized from "../Cart/CartMinimized";
-import CartContext from "../../store/cart-context";
 import classes from "./Header.module.css";
+import backgroundImage from "../../assets/background.jpg";
 
 const Header = () => {
   return (
-    <div className={classes.header}>
-      <h2>Reactive Vegan</h2>
-      <CartMinimized />
-    </div>
+    <React.Fragment>
+      <header className={classes.header}>
+        <h1>Reactive Vegan</h1>
+        <CartMinimized />
+      </header>
+      <div className={classes.image}>
+        <img src={backgroundImage} alt='A table full of vegan meals' />
+      </div>
+    </React.Fragment>
   );
 };
 

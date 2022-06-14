@@ -8,11 +8,13 @@ const CartMinimized = () => {
   const ctx = useContext(CartContext);
 
   return (
-    <div className={classes.cart} onClick={ctx.onOpen}>
-      <BsCart2 className={classes.icon} />
-      <p>Your Cart</p>
-      <Button className={classes.number} text={ctx.items.length} />
-    </div>
+    <Button className={classes.cart} onClick={ctx.onOpen}>
+      <span>
+        <BsCart2 className={classes.icon} />
+      </span>
+      <span>Your Cart</span>
+      <span className={classes.number}>{ctx.items.length}</span>
+    </Button>
   );
 };
 

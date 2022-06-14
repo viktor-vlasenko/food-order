@@ -1,5 +1,24 @@
 .menu {
-  width:auto;
-  max-width: 1000px;
+  width: 90%;
+  max-width: 60rem;
   margin: 0rem auto;
+  animation: menu-appear 1s ease-out forwards;
+}
+
+.menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@keyframes menu-appear {
+  from {
+    opacity: 0;
+    transform: translateY(3rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

@@ -26,28 +26,3 @@
   font-weight: bold;
   color:darkolivegreen;
 }
-
-.item-order {
-  width: 20%;
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.item-order label {
-  margin: 0 10% 0.2rem 0;
-  font-weight: bold;
-  width: 50%;
-}
-
-.item-order input {
-  margin: 0 0 0.2rem 0;
-  width: 40%;
-  font-size: 0.9rem;
-}
-
-.item-order Button {
-  margin: 0.2rem 0 0 30%;
-  width: 70%;
-  height: 1.6rem;
-  font-size: 1rem;
-}
