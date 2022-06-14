@@ -1,19 +1,9 @@
-.backdrop {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.75);
-}
-
-.cart {
-  position: fixed;
-  left: 10%;
-  top: 30%;
-  width: 80%;
-  z-index: 10;
-  overflow: hidden;
+.cart-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 20rem;
+  overflow: auto;
 }
 
 h3 {
@@ -23,8 +13,8 @@ h3 {
 .total {
   display: flex;
   justify-content: space-between;
-  margin: 0 1rem;
-  font-size: large;
+  margin: 1rem;
+  font-size: 1.2rem;
   font-weight: bold;
 }
 
@@ -53,9 +43,3 @@ h3 {
   color: green;
 }
 
-@media (min-width: 768px) {
-  .cart {
-    left: calc(50% - 20rem);
-    width: 40rem;
-  }
-}

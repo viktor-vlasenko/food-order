@@ -3,12 +3,12 @@ import CartMinimized from "../Cart/CartMinimized";
 import classes from "./Header.module.css";
 import backgroundImage from "../../assets/background.jpg";
 
-const Header = () => {
+const Header = (props) => {
   return (
     <React.Fragment>
       <header className={classes.header}>
         <h1>Reactive Vegan</h1>
-        <CartMinimized />
+        <CartMinimized onCartOpen={props.onCartOpen}/>
       </header>
       <div className={classes.image}>
         <img src={backgroundImage} alt='A table full of vegan meals' />

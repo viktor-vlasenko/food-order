@@ -14,7 +14,7 @@ const MenuItemForm = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    if (amount < 1) return;
+    if (+amount < 1 || amount.trim().length === 0) return;
     ctx.onAddItem({
       id: props.itemId,
       name: props.itemName,

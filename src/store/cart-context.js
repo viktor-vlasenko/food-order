@@ -1,70 +1,49 @@
 import React, { useReducer, useEffect } from "react";
 
 const CartContext = React.createContext({
-  isOpen: false,
   items: [],
   totalAmount: 0,
   onAddItem: () => {},
   onMinusClick: () => {},
   onPlusClick: () => {},
   onOrder: () => {},
-  onOpen: () => {},
-  onClose: () => {},
 });
 
+const defaultState = {
+  items: [],
+  totalAmount: 0,
+};
+
 const cartReducer = (state, action) => {
-  if (action.type === "TOGGLE") {
+  if (action.type === "ADD") {
     return {
-      isOpen: action.val,
-      items: state.items,
-      totalAmount: state.totalAmount,
-    };
-  } else if (action.type === "ADD") {
-    return {
-      isOpen: state.isOpen,
       items: [...state.items, action.val],
       totalAmount: state.totalAmount,
     };
   } else if (action.type === "CHANGE") {
     return {
-      isOpen: state.isOpen,
       items: action.val,
       totalAmount: state.totalAmount,
     };
   } else if (action.type === "ORDER") {
-    return {
-      isOpen: false,
-      items: [],
-      totalAmount: 0,
-    };
+    return defaultState;
   }
+  return defaultState;
 };
 
 export const CartContextProvider = (props) => {
-  const [cart, cartsDispatch] = useReducer(cartReducer, {
-    isOpen: false,
-    items: [],
-    totalAmount: 0,
-  });
+  const [cart, cartDispatch] = useReducer(cartReducer, defaultState);
 
   const { items: cartItems } = cart;
 
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem("cart"));
-    cartsDispatch({ type: "CHANGE", val: storedCart });
+    cartDispatch({ type: "CHANGE", val: storedCart });
   }, []);
 
   useEffect(() => {
     updateStorage();
   }, [cartItems]);
-
-  const openHandler = () => {
-    cartsDispatch({ type: "TOGGLE", val: true });
-  };
-
-  const closeHandler = () => {
-    cartsDispatch({ type: "TOGGLE", val: false });
-  };
 
   const itemInCart = (id) => {
     for (let i = 0; i < cart.items.length; i++) {
@@ -77,13 +56,13 @@ export const CartContextProvider = (props) => {
     let inCart = itemInCart(addedItem.id);
     if (inCart !== false) {
       let newCartItems = changeAmount(addedItem.id, addedItem.amount);
-      cartsDispatch({ type: "CHANGE", val: newCartItems });
+      cartDispatch({ type: "CHANGE", val: newCartItems });
     } else {
-      cartsDispatch({ type: "ADD", val: addedItem });
+      cartDispatch({ type: "ADD", val: addedItem });
     }
   };
 
-  const updateStorage = async () => {
+  const updateStorage = () => {
     localStorage.setItem("cart", JSON.stringify(cart.items));
   };
 
@@ -106,35 +85,28 @@ export const CartContextProvider = (props) => {
   };
 
   const minusClickHandler = (id) => {
-    cartsDispatch({ type: "CHANGE", val: changeAmount(id, -1) });
+    cartDispatch({ type: "CHANGE", val: changeAmount(id, -1) });
   };
 
   const plusClickHandler = (id) => {
-    cartsDispatch({ type: "CHANGE", val: changeAmount(id, 1) });
+    cartDispatch({ type: "CHANGE", val: changeAmount(id, 1) });
   };
 
   const orderHandler = () => {
-    if (cart.items.length === 0) {
-      cartsDispatch({ type: "TOGGLE", val: false });
-    } else {
-      console.log("Ordering...");
-      cartsDispatch({ type: "ORDER" });
-      localStorage.clear();
-    }
+    console.log("Ordering...");
+    cartDispatch({ type: "ORDER" });
+    localStorage.clear();
   };
 
   return (
     <CartContext.Provider
       value={{
-        isOpen: cart.isOpen,
         items: cart.items,
         totalAmount: calculateTotalAmount(cart.items),
         onAddItem: addItemHandler,
         onMinusClick: minusClickHandler,
         onPlusClick: plusClickHandler,
         onOrder: orderHandler,
-        onOpen: openHandler,
-        onClose: closeHandler,
       }}
     >
       {props.children}

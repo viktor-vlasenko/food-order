@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Cart from "./components/Cart/Cart";
 import Greeting from "./components/Greeting/Greeting";
 import Header from "./components/Header/Header";
@@ -29,12 +29,21 @@ const MENU = [
 ];
 
 function App() {
+  const [cartIsShown, setCartIsShown] = useState(false);
   const ctx = useContext(CartContext);
+
+  const showCartHandler = () => {
+    setCartIsShown(true);
+  }
+
+  const hideCartHandler = () => {
+    setCartIsShown(false);
+  }
 
   return (
     <React.Fragment>
-      {ctx.isOpen && <Cart />}
-      <Header />
+      {cartIsShown && <Cart onCartClose={hideCartHandler} />}
+      <Header onCartOpen={showCartHandler} />
       <Greeting />
       <Menu menu={MENU} />
     </React.Fragment>

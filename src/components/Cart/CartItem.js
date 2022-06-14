@@ -18,7 +18,7 @@ const CartItem = (props) => {
       <div className={classes.details}>
         <h4>{props.name}</h4>
         <div className={classes['price-amount']}>
-          <p className={classes.price}>${props.price}</p>
+          <p className={classes.price}>${props.price.toFixed(2)}</p>
           <div className={classes.amount}>x {props.amount}</div>
         </div>
       </div>
