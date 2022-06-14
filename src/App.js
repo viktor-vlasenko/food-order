@@ -1,9 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import Cart from "./components/Cart/Cart";
 import Greeting from "./components/Greeting/Greeting";
 import Header from "./components/Header/Header";
 import Menu from "./components/Menu/Menu";
-import CartContext from "./store/cart-context";
 
 const MENU = [
   {
@@ -30,7 +29,6 @@ const MENU = [
 
 function App() {
   const [cartIsShown, setCartIsShown] = useState(false);
-  const ctx = useContext(CartContext);
 
   const showCartHandler = () => {
     setCartIsShown(true);
