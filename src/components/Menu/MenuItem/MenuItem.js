@@ -8,7 +8,7 @@ const MenuItem = (props) => {
       <div className={classes.details}>
         <h4 className={classes.name}>{props.itemName}</h4>
         <p className={classes.description}>{props.itemDescription}</p>
-        <p className={classes.price}>${props.itemPrice}</p>
+        <p className={classes.price}>${props.itemPrice.toFixed(2)}</p>
       </div>
       <MenuItemForm
         itemId={props.itemId}

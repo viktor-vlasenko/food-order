@@ -1,0 +1,52 @@
+h2 {
+  margin: 1rem;
+}
+
+.checkout {
+  padding: 0 1rem 1rem;
+}
+
+.control {
+  height: 3rem;
+}
+
+.checkout > fieldset > legend {
+  font-weight: bold;
+}
+
+.checkout > fieldset > label {
+  display: block;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  margin: 1.2rem 0 0.5rem;
+}
+
+.actions Button {
+  min-width: 5rem;
+  height: 2rem;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-left: 1rem;
+  padding: 0 1rem;
+}
+
+.actions Button:hover {
+  background-color: darkgreen;
+  color: white;
+  box-shadow: 0 0 0 0;
+}
+
+.actions Button:disabled,
+.actions Button:disabled:hover,
+.actions Button:disabled:active {
+  cursor: not-allowed;
+  background-color: grey;
+}
+
+.back {
+  background-color: white;
+  color: green;
+}
