@@ -12,6 +12,7 @@ h2 {
 
 .error-text {
   margin: 0;
+  text-align: right;
   color: red;
 }
 
@@ -27,6 +28,11 @@ h2 {
 
 .checkout > fieldset > label {
   display: block;
+}
+
+.http-error {
+  margin-top:1rem;
+  font-size: 1.1rem;
 }
 
 .actions {

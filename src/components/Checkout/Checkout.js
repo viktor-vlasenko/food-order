@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import Modal from "../UI/Modal/Modal";
 import Input from "../UI/Input/Input";
 import Button from "../UI/Button/Button";
 import useInput from "../../hooks/use-input";
@@ -21,7 +20,7 @@ const validateAddress = (address) => {
 const Checkout = (props) => {
   const ctx = useContext(CartContext);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [orderError, setOrderError] = useState(null);
   const [paymentMethod, setPaymentMethod] = useState(null);
 
   const {
@@ -60,7 +59,7 @@ const Checkout = (props) => {
 
   const submitHandler = async (event) => {
     event.preventDefault();
-    setError(null);
+    setOrderError(null);
     setIsLoading(true);
 
     const orderDetails = {
@@ -85,17 +84,18 @@ const Checkout = (props) => {
       if (!response.ok) {
         throw new Error("Failed to place and order");
       }
-    } catch (err) {
-      setError(err.message || "Something went wrong");
-    }
 
-    setIsLoading(false);
-    ctx.onOrder();
-    props.hideCheckout();
-    resetFullName();
-    resetPhoneNumber();
-    resetAddress();
-    setPaymentMethod(null);
+      setIsLoading(false);
+      ctx.onOrder();
+      props.onOrderPlaced();
+      resetFullName();
+      resetPhoneNumber();
+      resetAddress();
+      setPaymentMethod(null);
+    } catch (err) {
+      setIsLoading(false);
+      setOrderError(err.message || "Something went wrong");
+    }
   };
 
   const fullNameClasses = fullNameHasError
@@ -111,8 +111,8 @@ const Checkout = (props) => {
     : classes.control;
 
   return (
-    <Modal>
-      <h2>Order Details</h2>
+    <React.Fragment>
+      {/* <h2>Order Details</h2> */}
       <form className={classes.checkout} onSubmit={submitHandler}>
         <div className={fullNameClasses}>
           <Input
@@ -186,8 +186,15 @@ const Checkout = (props) => {
             Cash
           </label>
         </fieldset>
+        <section className={classes["http-error"]}>
+          <p className={classes["error-text"]}>{orderError}</p>
+        </section>
         <div className={classes.actions}>
-          <Button className={classes.back} onClick={props.backToCartHandler} text="Back" />
+          <Button
+            className={classes.cancel}
+            onClick={props.hideCheckout}
+            text="Cancel"
+          />
           <Button
             type="submit"
             text={isLoading ? "Ordering..." : "Place Order"}
@@ -195,7 +202,7 @@ const Checkout = (props) => {
           />
         </div>
       </form>
-    </Modal>
+    </React.Fragment>
   );
 };
 
