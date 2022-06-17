@@ -7,7 +7,7 @@ import Checkout from "./components/Checkout/Checkout";
 
 function App() {
   const [cartIsShown, setCartIsShown] = useState(false);
-  const [checkout, setCheckout] = useState(true);
+  const [checkout, setCheckout] = useState(false);
 
   const showCartHandler = () => {
     setCartIsShown(true);
@@ -17,10 +17,23 @@ function App() {
     setCartIsShown(false);
   }
 
+  const showCheckout = () => {
+    setCheckout(true);
+  }
+
+  const hideCheckoutHandler = () => {
+    setCheckout(false)
+  }
+
+  const backToCartHandler= () => {
+    setCartIsShown(true);
+    setCheckout(false);
+  }
+
   return (
     <React.Fragment>
-      {checkout && <Checkout />}
-      {cartIsShown && <Cart onCartClose={hideCartHandler} />}
+      {cartIsShown && <Cart onCheckout={showCheckout} onCartClose={hideCartHandler} />}
+      {checkout && <Checkout backToCartHandler={backToCartHandler} hideCheckout={hideCheckoutHandler}/>}
       <Header onCartOpen={showCartHandler} />
       <Greeting />
       <Menu />

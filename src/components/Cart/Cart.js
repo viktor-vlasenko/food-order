@@ -24,8 +24,8 @@ const Cart = (props) => {
   );
 
   const orderHandler = () => {
-    ctx.onOrder();
     props.onCartClose();
+    props.onCheckout();
   };
 
   return (

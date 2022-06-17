@@ -93,7 +93,7 @@ export const CartContextProvider = (props) => {
   };
 
   const orderHandler = () => {
-    console.log("Ordering...");
+    console.log("Order placed");
     cartDispatch({ type: "ORDER" });
     localStorage.clear();
   };
